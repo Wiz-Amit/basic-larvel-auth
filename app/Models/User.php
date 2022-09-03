@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Symfony\Component\Intl\Countries;
 
 class User extends Authenticatable
 {
@@ -45,10 +46,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    // * Relationships
+
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
+    }
+
     // * Accessors
 
     public function getNameAttribute()
     {
         return "$this->first_name $this->last_name";
+    }
+
+    public function getCountryAttribute()
+    {
+        return Countries::getName($this->country_code);
     }
 }
