@@ -28,7 +28,7 @@ class UpdateUserRequest extends FormRequest
             'email' => ['required', 'string', 'email', 'max:255', "unique:users,email,{$this->route('user')->getKey()}"],
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['nullable', 'string', 'max:255'],
-            'gender' => ['nullable', 'exists:' . Gender::class . ',id'],
+            'gender_id' => ['nullable', 'exists:' . Gender::class . ',id'],
             'country_code' => ['required', 'string', 'max:2'],
         ];
     }

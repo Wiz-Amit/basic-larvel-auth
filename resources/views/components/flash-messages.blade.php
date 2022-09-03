@@ -1,17 +1,17 @@
 @if (session()->has('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
+    <x-alerts.success>
+        <span>{{ session('success') }}</span>
+    </x-alerts.success>
 @endif
 
 @if (session()->has('warning'))
-    <div class="alert alert-warning">
-        {{ session('warning') }}
-    </div>
+    <x-alerts.warning>
+        <span> {{ session('warning') }}</span>
+    </x-alerts.warning>
 @endif
 
 @if (session()->has('error'))
-    <div class="alert alert-error">
-        {{ session('error') }}
-    </div>
+    <x-alerts.error>
+        <span> {{ session('error') }}</span>
+    </x-alerts.error>
 @endif

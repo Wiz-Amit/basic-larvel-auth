@@ -43,8 +43,8 @@
                             @foreach ($genders as $gender)
                                 <div class="form-control">
                                     <label class="label cursor-pointer gap-2">
-                                        <input id="gender" type="radio" name="gender" value="{{ $gender->id }}"
-                                            checked="{{ $user->gender_id == $gender->id ? 'true' : 'false' }}"
+                                        <input id="gender_id" type="radio" name="gender_id"
+                                            value="{{ $gender->id }}" @if ($user->gender_id == $gender->id) checked @endif
                                             class="radio checked:bg-primary" />
                                         <span class="label-text">{{ __($gender->name) }}</span>
                                     </label>
@@ -60,8 +60,8 @@
                             class="select select-bordered rounded-none w-full">
                             <option disabled>{{ __('Select a country') }}</option>
                             @foreach ($countries as $code => $country)
-                                <option selected={{ $user->country_code == $code ? 'true' : 'false' }}
-                                    value="{{ $code }}">{{ __($country) }}</option>
+                                <option @if ($user->country_code == $code) selected @endif value="{{ $code }}">
+                                    {{ __($country) }}</option>
                             @endforeach
                         </select>
                         <x-error for="country_code" />
