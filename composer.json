@@ -53,8 +53,8 @@
         ],
         "setup": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-            "@php artisan key:generate --ansi",
             "composer install",
+            "@php artisan key:generate --ansi",
             "touch database/database.sqlite",
             "@php artisan migrate:refresh",
             "@php artisan db:seed",
