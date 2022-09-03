@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,11 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard', ['users' => User::query()->paginate()]);
+    $usersCount = User::count();
+    $newRegisters = User::query()->where('created_at', '>=', now()->startOf('month'))->count();
+    return view('dashboard', compact("usersCount", 'newRegisters'));
 })->middleware(['auth'])->name('dashboard');
+
+Route::resource('users', UserController::class);
 
 require __DIR__ . '/auth.php';
