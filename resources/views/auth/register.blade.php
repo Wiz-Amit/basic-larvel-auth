@@ -7,7 +7,7 @@
         </x-slot>
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        {{-- <x-auth-validation-errors class="mb-4" :errors="$errors" /> --}}
 
         <form method="POST" action="{{ route('register') }}" class="space-y-3">
             @csrf
@@ -15,23 +15,22 @@
             <!-- Email Address -->
             <div>
                 <x-label class="sr-only" for="email" :value="__('Email')" />
-
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :placeholder="__('Email')"
                     :value="old('email')" autofocus required />
+                <x-error for="email" />
             </div>
 
             <!-- Password -->
             <div>
                 <x-label class="sr-only" for="password" :value="__('Password')" />
-
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" :placeholder="__('Password')"
                     required autocomplete="new-password" />
+                <x-error for="password" />
             </div>
 
             <!-- Confirm Password -->
             <div>
                 <x-label class="sr-only" for="password_confirmation" :value="__('Confirm Password')" />
-
                 <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
                     name="password_confirmation" :placeholder="__('Confirm Password')" required />
             </div>
@@ -40,38 +39,45 @@
             <div class="flex gap-3">
                 <div>
                     <x-label class="sr-only" for="first_name" :value="__('First Name')" />
-
                     <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
                         :placeholder="__('First Name')" :value="old('first_name')" required />
+                    <x-error for="first_name" />
                 </div>
 
                 <div>
                     <x-label class="sr-only" for="last_name" :value="__('Last Name')" />
-
                     <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :placeholder="__('Last Name')"
                         :value="old('last_name')" autofocus />
+                    <x-error for="last_name" />
                 </div>
             </div>
 
             <!-- Gender -->
-            <div class="flex gap-3">
-                @foreach ($genders as $gender)
-                    <div class="form-control">
-                        <label class="label cursor-pointer gap-2">
-                            <input id="gender" type="radio" name="gender" class="radio checked:bg-primary" />
-                            <span class="label-text">{{ __($gender->name) }}</span>
-                        </label>
-                    </div>
-                @endforeach
+            <div class="">
+                <div class="flex gap-3">
+                    @foreach ($genders as $gender)
+                        <div class="form-control">
+                            <label class="label cursor-pointer gap-2">
+                                <input id="gender" type="radio" name="gender" value="{{ $gender->id }}"
+                                    class="radio checked:bg-primary" />
+                                <span class="label-text">{{ __($gender->name) }}</span>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+                <x-error for="gender" />
             </div>
 
             <!-- Country -->
-            <select id="country_code" name="country_code" class="select select-bordered rounded-none w-full">
-                <option disabled selected>{{ __('Select a country') }}</option>
-                @foreach ($countries as $code => $country)
-                    <option value="{{ $code }}">{{ __($country) }}</option>
-                @endforeach
-            </select>
+            <div class="">
+                <select id="country_code" name="country_code" class="select select-bordered rounded-none w-full">
+                    <option disabled selected>{{ __('Select a country') }}</option>
+                    @foreach ($countries as $code => $country)
+                        <option value="{{ $code }}">{{ __($country) }}</option>
+                    @endforeach
+                </select>
+                <x-error for="country_code" />
+            </div>
 
             <!-- Conditions -->
             <div>
@@ -80,6 +86,8 @@
                         <input id="terms" type="checkbox" name="terms" class="checkbox checkbox-primary" />
                         <span class="label-text">{{ __('I agree with terms and conditions') }}</span>
                     </label>
+
+                    <x-error for="terms" />
                 </div>
 
                 <div class="form-control">
