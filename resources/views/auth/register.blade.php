@@ -17,7 +17,7 @@
                 <x-label class="sr-only" for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :placeholder="__('Email')"
-                    :value="old('email')" required />
+                    :value="old('email')" autofocus required />
             </div>
 
             <!-- Password -->
@@ -42,7 +42,7 @@
                     <x-label class="sr-only" for="first_name" :value="__('First Name')" />
 
                     <x-input id="first_name" class="block mt-1 w-full" type="text" name="first_name"
-                        :placeholder="__('First Name')" :value="old('first_name')" required autofocus />
+                        :placeholder="__('First Name')" :value="old('first_name')" required />
                 </div>
 
                 <div>
