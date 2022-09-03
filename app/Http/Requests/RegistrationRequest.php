@@ -33,7 +33,7 @@ class RegistrationRequest extends FormRequest
             'gender' => ['nullable', 'exists:' . Gender::class . ',id'],
             'country_code' => ['required', 'string', 'max:2'],
             'terms' => ['accepted'],
-            'newsletter' => ['boolean'],
+            'newsletter' => [],
         ];
     }
 }
