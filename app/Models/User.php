@@ -3,11 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+
 use Laravel\Sanctum\HasApiTokens;
 use Symfony\Component\Intl\Countries;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -46,12 +48,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    // * Scopes
+
+    public function scopeMonthly(Builder $query)
+    {
+        $query->where('created_at', '>=', now()->startOf('month'));
+    }
+
+
     // * Relationships
 
     public function gender()
     {
         return $this->belongsTo(Gender::class);
     }
+
 
     // * Accessors
 

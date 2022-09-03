@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Gender;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\Intl\Countries;
 use App\Http\Requests\UpdateUserRequest;
 
@@ -43,13 +44,16 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            // throw new \Exception("Error Processing Request", 1);
+            if ($user->id == Auth::id()) {
+                throw new \Exception('You cannot delete your own account', 1);
+            }
 
             $user->delete();
             session()->flash('success', __('User has been delete'));
         } catch (\Throwable $th) {
             session()->flash('error', __($th->getMessage()));
         }
+
         return redirect()->route('users.index');
     }
 }

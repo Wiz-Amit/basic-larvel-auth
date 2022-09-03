@@ -19,12 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    $usersCount = User::count();
-    $newRegisters = User::query()->where('created_at', '>=', now()->startOf('month'))->count();
-    return view('dashboard', compact("usersCount", 'newRegisters'));
-})->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', function () {
+        $usersCount = User::count();
+        $newRegisters = User::query()->monthly()->count();
+        return view('dashboard', compact("usersCount", 'newRegisters'));
+    })->name('dashboard');
 
-Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class);
+});
+
 
 require __DIR__ . '/auth.php';

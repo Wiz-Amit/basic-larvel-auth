@@ -58,7 +58,7 @@
                     @foreach ($genders as $gender)
                         <div class="form-control">
                             <label class="label cursor-pointer gap-2">
-                                <input id="gender" type="radio" name="gender"
+                                <input id="gender" type="radio" name="gender" value="{{ $gender->id }}"
                                     @if (old('gender') == $gender->id) checked @endif class="radio checked:bg-primary" />
                                 <span class="label-text">{{ __($gender->name) }}</span>
                             </label>
