@@ -23,12 +23,12 @@
                         </div>
 
                         <div class="actions flex flex-wrap gap-3">
-                            <a href="{{ route('users.edit', $user->id) }}"
+                            <a href="{{ route('users.edit', $user->getKey()) }}"
                                 class="btn btn-primary btn-outline rounded-none">Edit</a>
-                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
+                            <form action="{{ route('users.destroy', $user->getKey()) }}" method="POST">
                                 @method('DELETE')
                                 @csrf
-                                <x-button type="button" onclick="confirmDeletion(event, {{ $user->id }})"
+                                <x-button type="button" onclick="confirmDeletion(event, '{{ $user->identifier }}')"
                                     class="btn btn-error btn-outline">
                                     Delete</x-button>
                             </form>
@@ -47,8 +47,8 @@
         @once
             <script>
                 // Should be using Sweet alert on production
-                window.confirmDeletion = (e, id) => {
-                    const confirmed = confirm(`Do you really want to delete #${id}?`);
+                window.confirmDeletion = (e, identifier) => {
+                    const confirmed = confirm(`Do you really want to delete ${identifier}?`);
                     if (!confirmed) return;
 
                     e.target.closest('form').submit();

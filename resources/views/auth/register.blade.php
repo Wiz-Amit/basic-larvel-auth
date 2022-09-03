@@ -47,7 +47,7 @@
                 <div>
                     <x-label class="sr-only" for="last_name" :value="__('Last Name')" />
                     <x-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :placeholder="__('Last Name')"
-                        :value="old('last_name')" autofocus />
+                        :value="old('last_name')" />
                     <x-error for="last_name" />
                 </div>
             </div>

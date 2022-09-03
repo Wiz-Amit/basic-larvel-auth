@@ -55,6 +55,16 @@ class User extends Authenticatable
 
     // * Accessors
 
+    public function getResourceUrlAttribute()
+    {
+        return route('users.show', $this->getKey());
+    }
+
+    public function getIdentifierAttribute()
+    {
+        return "#{$this->getKey()} {$this->name}";
+    }
+
     public function getNameAttribute()
     {
         return "$this->first_name $this->last_name";

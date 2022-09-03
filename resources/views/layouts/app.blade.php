@@ -30,6 +30,10 @@
 
         <!-- Page Content -->
         <main>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-5 mt-3 -mb-3">
+                <x-flash-messages />
+            </div>
+
             {{ $slot }}
         </main>
     </div>
